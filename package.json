@@ -19,6 +19,7 @@
   "homepage": "https://github.com/imagination-station/backend#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "firebase-admin": "^8.6.0",
