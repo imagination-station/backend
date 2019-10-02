@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {checkIfAuthenticated} from '../services/authentication/authMiddleware';
+import {checkIfAuthenticated} from '../services/authentication/CheckAuthorization';
 
 let router = Router();
 

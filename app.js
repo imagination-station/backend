@@ -10,10 +10,10 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 import models from './services/MongoConnect'
 
 // === Top Level Route Declarations === 
-import auth from './routes/auth.js';
+import auth from './routes/Auth.js';
 app.use("/auth", auth);
 
-import content from './routes/content.js';
+import content from './routes/Content.js';
 app.use("/content", content);
 
 
