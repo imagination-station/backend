@@ -8,7 +8,6 @@ Login will happen client side and firebase will give you an authorization token.
 This token should then be passed in the Authorization section of every request. (Example: "Bearer: TOKEN"). This will make sure only authorized persons can access a resource.
 
 ## Endpoints (WIP)
-Take a look in the code to see what each endpoint expects.
 
 #### POST /users/social
 Creates a user when authenticated through Google/Facebook
@@ -69,6 +68,9 @@ Request JSON:
     }]
 } 
 ```
+
+#### GET /cities/routes/:id
+Retrieves a route by its id
 
 #### GET /cities/routes
 Retrieves up to 20 routes
