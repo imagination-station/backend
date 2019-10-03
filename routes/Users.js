@@ -4,12 +4,12 @@ import {checkIfAuthenticated} from '../services/authentication/CheckAuthorizatio
 
 let router = express.Router();
 
-router.post('/create/mongo', createUserMongo, (req, res) => {
+router.post('/mongo', createUserMongo, (req, res) => {
     res.write("\nMongo Success");
     res.end();
 })
 
-router.post('/create/firebase', createUserMongo, createUserFirebase, (req, res) => {
+router.post('/firebase', createUserMongo, createUserFirebase, (req, res) => {
     res.write("\nFirebase Success");
     res.end();
 })

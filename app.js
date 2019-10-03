@@ -13,8 +13,8 @@ import models from './services/MongoConnect'
 import users from './routes/Users';
 app.use("/users", users);
 
-import content from './routes/Content.js';
-app.use("/content", content);
+import cities from './routes/Cities';
+app.use("/cities", cities);
 
 
 app.get('/', (req, res) => res.send('Hello World!'));
