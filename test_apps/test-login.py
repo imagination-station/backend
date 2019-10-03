@@ -1,7 +1,10 @@
 import pyrebase
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 config = {
-  "apiKey": "whoops,
+  "apiKey": os.getenv("API_KEY"),
   "authDomain": "imaginationstation-3c7a7.firebaseapp.com",
   "databaseURL": "https://imaginationstation-3c7a7.firebaseio.com",
   "storageBucket": "imaginationstation-3c7a7.appspot.com",
