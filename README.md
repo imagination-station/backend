@@ -1,11 +1,29 @@
 ## backend
 
-Used this as a basis for the authentication flow: https://dev.to/emeka/securing-your-express-node-js-api-with-firebase-auth-4b5f
+environment variables are handled through dotenv package. You can add a .env file to the root of the project and add DB_HOST and GOOGLE_APPLICATION_CREDENTIALS variables. DB_HOST will be the URL for the mongoDB cluster which you can find on the mongoDB atlas portal. GOOGLE_APPLICATION_CREDENTIALS is the path to the firebase service account keys you can download from firebase.
 
-Creating a new user happens through a POST request to auth/createUser.
-
-Login will happen client side and firebase will give you an authorization token. 
+# Auth for endpoints
+Login will happen client side and firebase will give you an authorization token. (user.tokenID or something similar)
 
 This token should then be passed in the Authorization section of every request. (Example: "Bearer: TOKEN"). This will make sure only authorized persons can access a resource.
 
-To run the server youll need to pull a serviceAccountKey.json file form the firebase console, put the file in a keys folder, and set the env variable "export GOOGLE_APPLICATION_CREDENTIALS=/pathTo/backend/keys/serviceAccountKey.json"
+# Endpoints so far
+Take a look in the code to see what each endpoint expects.
+
+POST /users/mongo
+
+will add a user to the mongo database
+
+use this if you create a user through facebook or google authentication
+
+POST /users/firebase
+
+will add a new user to firebase and mongo database
+
+POST /cities
+
+will add a new city to the mongoDB
+
+POST /cities/routes
+
+will add a new route and its respective pins to the mongoDB
