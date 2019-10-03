@@ -68,3 +68,6 @@ Request JSON:
     }]
 } 
 ```
+
+#### GET /cities/:id
+Retrieves a city by its id
