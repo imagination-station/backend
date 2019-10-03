@@ -40,4 +40,48 @@ const getRouteById = (req, res) => {
 
 }
 
-export {getRouteById}
+const getRoutes = (req, res) => {
+
+    models.Route.find({}).lean().limit(20)
+        .then((routes) => {
+                
+            async.map(routes, async (route) => {
+                    
+                    await models.City.findById(route.city)    
+                        .lean().exec()
+                        .then((r) => {
+                            route.city = r;
+                        })
+            
+                    await models.User.findById(route.creator)    
+                        .lean().exec()
+                        .then((r) => {
+                            route.creator = r;
+                        }) 
+
+                    await models.Pin.find({'_id': route.pins})  
+                        .lean().exec()
+                        .then((r) => {
+                            route.pins = r
+                        })
+                    
+                    return route
+                }, 
+                (err, results) => {
+                    if (err) {
+                        console.log(err)
+                        res.status(500).send(err)
+                    }
+                    res.send(results)
+                }
+            );
+
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+        
+}
+
+export {getRouteById, getRoutes}

@@ -3,7 +3,7 @@ import {checkIfAuthenticated} from '../services/authentication/CheckAuthorizatio
 import createCity from '../services/cities/CreateCity';
 import createRoute from '../services/cities/CreateRoute';
 import {getCityById} from '../services/cities/GetCity'
-import {getRouteById} from '../services/cities/GetRoute'
+import {getRouteById, getRoutes} from '../services/cities/GetRoute'
 
 let router = Router();
 
@@ -16,13 +16,15 @@ router.post("/", checkIfAuthenticated, createCity, (req, res) => {
     res.end()
 });  
 
-router.get("/:id", checkIfAuthenticated, getCityById);  
-
-router.post("/routes", checkIfAuthenticated, createRoute, (req, res) => {
+router.post("/routes/", checkIfAuthenticated, createRoute, (req, res) => {
     res.write("\nCreated Routed!");
     res.end()
 });  
 
+router.get("/routes/", checkIfAuthenticated, getRoutes);
+
 router.get("/routes/:id", checkIfAuthenticated, getRouteById); 
+
+router.get("/:id", checkIfAuthenticated, getCityById);  
 
 export default router;
