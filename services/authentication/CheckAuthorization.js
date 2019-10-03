@@ -12,7 +12,6 @@ const getAuthToken = (req, res, next) => {
   next();
 };
 
-
 export const checkIfAuthenticated = (req, res, next) => {
  getAuthToken(req, res, async () => {
     try {
