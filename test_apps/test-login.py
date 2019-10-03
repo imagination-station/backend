@@ -1,7 +1,7 @@
 import pyrebase
 
 config = {
-  "apiKey": "AIzaSyAWeLw5FDXUjSYtgzZ-1cxbjMrynXfyKcA",
+  "apiKey": "WHOOPS",
   "authDomain": "imaginationstation-3c7a7.firebaseapp.com",
   "databaseURL": "https://imaginationstation-3c7a7.firebaseio.com",
   "storageBucket": "imaginationstation-3c7a7.appspot.com",
