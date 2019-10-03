@@ -1,6 +1,6 @@
 import models from '../MongoConnect'
 
-const findUserById = (req, res) => {
+const getUserById = (req, res) => {
 
     console.log(req.params.id)
     var userId = req.params.id
@@ -28,4 +28,4 @@ const findUserById = (req, res) => {
         })
 }
 
-export {findUserById}
+export {getUserById}

@@ -2,8 +2,8 @@ import {Router} from 'express';
 import {checkIfAuthenticated} from '../services/authentication/CheckAuthorization';
 import createCity from '../services/cities/CreateCity';
 import createRoute from '../services/cities/CreateRoute';
-import {findCityById} from '../services/cities/FindCity'
-import {findRouteById} from '../services/cities/FindRoute'
+import {getCityById} from '../services/cities/GetCity'
+import {getRouteById} from '../services/cities/GetRoute'
 
 let router = Router();
 
@@ -16,13 +16,13 @@ router.post("/", checkIfAuthenticated, createCity, (req, res) => {
     res.end()
 });  
 
-router.get("/:id", checkIfAuthenticated, findCityById);  
+router.get("/:id", checkIfAuthenticated, getCityById);  
 
 router.post("/routes", checkIfAuthenticated, createRoute, (req, res) => {
     res.write("\nCreated Routed!");
     res.end()
 });  
 
-router.get("/routes/:id", checkIfAuthenticated, findRouteById); 
+router.get("/routes/:id", checkIfAuthenticated, getRouteById); 
 
 export default router;

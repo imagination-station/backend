@@ -40,7 +40,8 @@ const createPin = (p) => {
     try {
         var pin = new models.Pin({ 
             name: p.name,
-            coordinates: p.coordinates
+            coordinates: p.coordinates,
+            description: p.description
         });
         pin.save().then(id.push(pin.id))
 
