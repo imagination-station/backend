@@ -7,7 +7,7 @@ import createRoute from '../services/cities/CreateRoute';
 let router = Router();
 
 router.get("/", checkIfAuthenticated, (req, res) => {
-    res.send("You got mail!");
+    res.send("BOILERPLATE");
 });  
 
 router.post("/", checkIfAuthenticated, createCity, (req, res) => {

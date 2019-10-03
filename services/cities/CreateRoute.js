@@ -12,7 +12,11 @@ const createRoute = (req, res, next) => {
     } = req.body;
 
     try {
-        let pinObjs = createPin(pins)
+        let pinObjs = []
+
+        for (const pin of pins) {
+            pinObjs.push(createPin(pin))     
+        }
 
         var route = new models.Route({ 
             name: name, 
@@ -31,27 +35,21 @@ const createRoute = (req, res, next) => {
     next();
 }
 
-const createPin = (pins) => {
-    var pinObjs = []
+const createPin = (p) => {
+    var id = []
+    try {
+        var pin = new models.Pin({ 
+            name: p.name,
+            coordinates: p.coordinates
+        });
+        pin.save().then(id.push(pin.id))
 
-    for (const pin of pins) {
-        console.log(pin);
-        try {
-            var pinM = new models.Pin({ 
-                name: pin.name,
-                coordinates: pin.coordinates
-            });
-
-
-            pinM.save().then(pinObjs.push(pinM.id))
-
-        } catch (error) {
-            console.log('error', error);
-            res.send({ error });
-        }
+    } catch (error) {
+        console.log('error', error);
+        res.send({ error });
     }
 
-    return pinObjs
+    return id[0]
 }
 
 export default createRoute
