@@ -50,6 +50,9 @@ Request JSON:
 } 
 ```
 
+#### GET /cities/:id
+Retrieves a city by its id
+
 #### POST /cities/routes
 Adds a new route and its respective pins to the db
 
