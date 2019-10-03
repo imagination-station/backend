@@ -7,16 +7,9 @@ const routeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Local'
     },
-    location: { 
-        country: {
-            type: String
-        }, 
-        city: {
-            type: String,
-        }, 
-        neighborhood: {
-            type: String,
-        }
+    city: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'City'
     },
     pins: [{ 
         type: mongoose.Schema.Types.ObjectId, 
@@ -26,7 +19,10 @@ const routeSchema = new mongoose.Schema({
         type: Date, 
         default: Date.now()
     },
-    accessed: Number,
+    accessed: {
+        type: Number,
+        default: 0
+    }
 });
 
 const Route = mongoose.model('Route', routeSchema);

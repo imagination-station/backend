@@ -6,6 +6,7 @@ import Local from '../models/Local';
 import Visitor from '../models/Visitor';
 import Route from '../models/Route';
 import Pin from '../models/Pin';
+import City from '../models/City';
 
 mongoose.set('useUnifiedTopology', true);
 
@@ -17,5 +18,5 @@ db.once('open', function() {
     console.log('Connected to mongo')
 });
 
-const models = { Local, Visitor, Route, Pin };
+const models = { Local, Visitor, Route, Pin, City };
 export default models;
