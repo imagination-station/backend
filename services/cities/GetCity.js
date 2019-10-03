@@ -1,6 +1,6 @@
 import models from '../MongoConnect'
 
-const findCityById = (req, res) => {
+const getCityById = (req, res) => {
 
     console.log(req.params.id)
     var cityId = req.params.id
@@ -16,4 +16,4 @@ const findCityById = (req, res) => {
         })
 }
 
-export {findCityById}
+export {getCityById}

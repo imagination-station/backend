@@ -1,6 +1,6 @@
 import express from 'express';
 import {createUserFirebase, createUserMongo} from '../services/users/CreateUser';
-import {findUserById} from '../services/users/FindUser';
+import {getUserById} from '../services/users/GetUser';
 import {checkIfAuthenticated} from '../services/authentication/CheckAuthorization';
 
 let router = express.Router();
@@ -15,6 +15,6 @@ router.post('/email', createUserMongo, createUserFirebase, (req, res) => {
     res.end();
 })
 
-router.get('/:id', checkIfAuthenticated, findUserById)
+router.get('/:id', checkIfAuthenticated, getUserById)
 
 export default router;

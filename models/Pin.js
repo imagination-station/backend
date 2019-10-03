@@ -7,7 +7,8 @@ const pinSchema = new mongoose.Schema({
     },
     coordinates: [{
         type: Number
-    }]
+    }],
+    description: String
 });
 
 const Pin = mongoose.model('Pin', pinSchema);

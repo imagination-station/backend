@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/imagination-station/backend#readme",
   "dependencies": {
+    "async": "^3.1.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "esm": "^3.2.25",

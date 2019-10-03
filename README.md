@@ -64,7 +64,8 @@ Request JSON:
     city: city id,
     pins: [{
         name: String,
-        coordinates: [Number, Number]
+        coordinates: [Number, Number],
+        description: String,
     }]
 } 
 ```
