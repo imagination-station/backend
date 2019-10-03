@@ -35,6 +35,9 @@ Request JSON:
 } 
 ```
 
+#### GET /users/:id
+Retrieves a user by the id
+
 #### POST /cities
 Adds a new city to the db
 
