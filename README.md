@@ -70,5 +70,5 @@ Request JSON:
 } 
 ```
 
-#### GET /cities/:id
-Retrieves a city by its id
+#### GET /cities/routes
+Retrieves up to 20 routes
