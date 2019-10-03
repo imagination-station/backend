@@ -7,23 +7,58 @@ Login will happen client side and firebase will give you an authorization token.
 
 This token should then be passed in the Authorization section of every request. (Example: "Bearer: TOKEN"). This will make sure only authorized persons can access a resource.
 
-## Endpoints so far
+## Endpoints (WIP)
 Take a look in the code to see what each endpoint expects.
 
-POST /users/social
+#### POST /users/social
+Creates a user when authenticated through Google/Facebook
 
-will add a user to the mongo database
+Request JSON:
+```
+{ 
+    name: String,
+    email: String,
+    location: city id,
+} 
+```
 
-use this if you create a user through facebook or google authentication
+#### POST /users/email
+Creates a user when authenticated through email/password
 
-POST /users/email
+Request JSON:
+```
+{ 
+    name: String,
+    email: String,
+    password: String,
+    location: city id,
+} 
+```
 
-will add a new user to firebase and mongo database
+#### POST /cities
+Adds a new city to the db
 
-POST /cities
+Request JSON:
+```
+{
+    name: String, 
+    state: String,
+    country: String
+} 
+```
 
-will add a new city to the mongoDB
+#### POST /cities/routes
+Adds a new route and its respective pins to the db
 
-POST /cities/routes
-
-will add a new route and its respective pins to the mongoDB
+Request JSON:
+```
+{
+    name: String,
+    creator: user id,
+    city: city id,
+    pins: [{
+        name: String,
+        coordinates: [Number, Number]
+    }]
+} 
+```
