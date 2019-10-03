@@ -10,13 +10,13 @@ This token should then be passed in the Authorization section of every request. 
 ## Endpoints so far
 Take a look in the code to see what each endpoint expects.
 
-POST /users/mongo
+POST /users/social
 
 will add a user to the mongo database
 
 use this if you create a user through facebook or google authentication
 
-POST /users/firebase
+POST /users/email
 
 will add a new user to firebase and mongo database
 
