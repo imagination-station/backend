@@ -1,7 +1,7 @@
 import admin from '../authentication/FirebaseService';
 import models from '../MongoConnect'
 
-const createUserFirebase = async (req, res) => {
+const createUserFirebase = (req, res, next) => {
 
     console.log(req.body)
 
@@ -10,15 +10,15 @@ const createUserFirebase = async (req, res) => {
         password,
     } = req.body;
 
-    const user = await admin.auth().createUser({
+    const user = admin.auth().createUser({
         email,
         password,
     });
 
-    return res.send(user);
+    next();
 }
 
-const createUserMongo = async (req, res, next) => {
+const createUserMongo = (req, res, next) => {
 
     console.log(req.body)
 
@@ -48,8 +48,8 @@ const createUserMongo = async (req, res, next) => {
             });
         }
 
-        await user.save()
-        req.mongoText = "Created mongo user succesfully!"
+        user.save().then(res.write("Mongo ObjectID:" + user.id))
+
     } catch (error) {
         console.log('error', error);
         res.send({ error });
