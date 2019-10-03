@@ -7,20 +7,24 @@ const findUserById = (req, res) => {
     var user = {};
 
     models.User.findById(userId)        
-        .lean().exec().then((results) => {
+        .lean().exec()
+        .then((results) => {
             user = results
 
-            try {
-                // get the city information
-                models.City.findById(results.location)  
-                    .lean().exec().then((results) => {
-                        user.location = results
+            // get the city information
+            models.City.findById(results.location)  
+                .lean().exec()
+                .then((results) => {
+                    user.location = results
 
-                        return res.send(user)
-                    })
-            } catch (err3) {
-                return res.send(err3)
-            } 
+                    return res.send(user)
+                })
+                .catch((error) => {
+                    return res.send(error)
+                })
+        })
+        .catch((error) => {
+            return res.send(error)
         })
 }
 
