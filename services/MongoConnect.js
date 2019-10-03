@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 dotenv.config();
 
-import Local from '../models/Local';
-import Visitor from '../models/Visitor';
+import User from '../models/User';
 import Route from '../models/Route';
 import Pin from '../models/Pin';
 import City from '../models/City';
@@ -18,5 +17,5 @@ db.once('open', function() {
     console.log('Connected to mongo')
 });
 
-const models = { Local, Visitor, Route, Pin, City };
+const models = { User, Route, Pin, City };
 export default models;

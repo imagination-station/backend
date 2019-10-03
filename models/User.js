@@ -1,16 +1,12 @@
 import mongoose from 'mongoose';
 
 
-const localSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: String,
     email: String,
-    location: { 
-        country: {
-            type: String
-        }, 
-        city: {
-            type: String,
-        }, 
+    location: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'City'
     },
     savedRoutes: [{
         type: mongoose.Schema.Types.ObjectId, 
@@ -22,5 +18,5 @@ const localSchema = new mongoose.Schema({
     }]
 });
 
-const Local = mongoose.model('Local', localSchema);
-export default Local;
+const User = mongoose.model('User', userSchema);
+export default User;
