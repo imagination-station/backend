@@ -52,4 +52,30 @@ const getRoutes = (req, res) => {
         
 }
 
-export {getRouteById, getRoutes}
+const getRoutesByCity = (req, res) => {
+
+    let cityId = req.params.id
+
+    models.Route.find({"city": cityId}).lean().limit(20)
+        .then((routes) => {
+                
+            async.map(routes, 
+                async (route) => {return populateRouteData(route)}, 
+                (err, results) => {
+                    if (err) {
+                        console.log(err)
+                        res.status(500).send(err)
+                    }
+                    res.send(results)
+                }
+            );
+
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+        
+}
+
+export {getRouteById, getRoutes, getRoutesByCity}
