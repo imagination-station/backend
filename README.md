@@ -49,6 +49,9 @@ Request JSON:
 } 
 ```
 
+#### GET /cities/
+Retrieves the cities in the db
+
 #### GET /cities/:id
 Retrieves a city by its id
 

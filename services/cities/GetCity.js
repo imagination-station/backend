@@ -16,4 +16,17 @@ const getCityById = (req, res) => {
         })
 }
 
-export {getCityById}
+const getCities = (req, res) => {
+
+    models.City.find({}).lean()
+        .then((cities) => {
+            res.send(cities)
+        
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+}
+
+export {getCityById, getCities}
