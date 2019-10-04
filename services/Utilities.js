@@ -7,7 +7,7 @@ async function populateRouteData(route) {
         })
     await models.User.findById(route.creator).lean().exec()
         .then((creator) => {
-            route.creator = creator
+            route.creator = {"id": creator._id, "username": creator.username , "name": creator.name}
         })
     await models.Pin.find({'_id': route.pins}).lean().exec()
         .then((pins) => {

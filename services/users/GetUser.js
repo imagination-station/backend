@@ -12,10 +12,10 @@ const getUserById = (req, res) => {
             user = results
 
             // get the city information
-            models.City.findById(results.location)  
+            models.City.find({"placeId": results.location})  
                 .lean().exec()
                 .then((results) => {
-                    user.location = results
+                    user.location = results[0]
 
                     return res.send(user)
                 })

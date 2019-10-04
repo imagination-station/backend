@@ -1,4 +1,5 @@
 import models from '../MongoConnect'
+import async from "async"
 
 const createRoute = (req, res, next) => {
 
@@ -10,6 +11,7 @@ const createRoute = (req, res, next) => {
         city,
         pins
     } = req.body;
+    let placeId = city
 
     try {
         let pinObjs = []
@@ -18,30 +20,42 @@ const createRoute = (req, res, next) => {
             pinObjs.push(createPin(pin))     
         }
 
-        var route = new models.Route({ 
-            name: name, 
-            creator: creator,
-            city: city,
-            pins: pinObjs
-        });
+        async.waterfall([
+            (next) => {
+                models.City.find({"placeId": placeId}).lean()
+                .then((city) => {
+                    next(null, city[0]._id)
+                })
+            },
+            (cityId, next) => {
+                let route = new models.Route({ 
+                    name: name, 
+                    creator: creator,
+                    city: cityId,
+                    pins: pinObjs
+                }); 
 
-        route.save().then(res.write("Mongo ObjectID:" + route.id))
+                next(null, route)
+            }
+        ],(err, route) => {
+            if (err) console.log(err)
+            route.save().then(res.send("Mongo ObjectID:" + route.id))
+        })
 
     } catch (error) {
         console.log('error', error);
         res.send({ error });
     }
     
-    next();
 }
 
 const createPin = (p) => {
     var id = []
     try {
         var pin = new models.Pin({ 
-            name: p.name,
-            coordinates: p.coordinates,
-            description: p.description
+            placeId: p.placeId,
+            geometry: p.geometry,
+            properties: p.properties
         });
         pin.save().then(id.push(pin.id))
 

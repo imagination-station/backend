@@ -54,27 +54,44 @@ const getRoutes = (req, res) => {
 
 const getRoutesByCity = (req, res) => {
 
-    let cityId = req.params.id
+    let placeId = req.params.id
 
-    models.Route.find({"city": cityId}).lean().limit(20)
-        .then((routes) => {
+    async.waterfall([
+        (next) => {
+            models.City.find({"placeId": placeId}).lean()
+                .then((city) => {
+                    next(null, city[0]._id)
+                })
+        },
+        (cityId, next) => {
+            models.Route.find({"city": cityId}).lean().limit(20)
+                .then((routes) => {
+                    next(null, routes)
                 
-            async.map(routes, 
-                async (route) => {return populateRouteData(route)}, 
-                (err, results) => {
-                    if (err) {
-                        console.log(err)
-                        res.status(500).send(err)
-                    }
-                    res.send(results)
-                }
-            );
+                })
+        }
+    ], (err, routes) => {
+        if (err) {
+            res.status("500").send("")
+            return
+        } 
 
-        })
-        .catch((err) => {
-            console.log(err)
-            res.status(500).send(err)
-        })
+        if (routes == null || routes.length == 0) {
+            res.status("404").send("")
+            return
+        }
+
+        async.map(routes, 
+            async (route) => {return populateRouteData(route)}, 
+            (err, results) => {
+                if (err) {
+                    console.log(err)
+                    res.status(500).send(err)
+                }
+                res.send(results)
+            }
+        );
+    })
         
 }
 
