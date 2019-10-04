@@ -35,6 +35,8 @@ Request JSON:
 ```
 
 #### GET /users/:id
+:id - User ID
+
 Retrieves a user by the id
 
 #### POST /cities
@@ -53,6 +55,8 @@ Request JSON:
 Retrieves the cities in the db
 
 #### GET /cities/:id
+:id - City ID
+
 Retrieves a city by its id
 
 #### POST /cities/routes
@@ -73,7 +77,14 @@ Request JSON:
 ```
 
 #### GET /cities/routes/:id
+:id - Route ID
+
 Retrieves a route by its id
 
 #### GET /cities/routes
 Retrieves up to 20 routes
+
+#### GET /cities/:id/routes
+:id - City ID
+
+Retrieves up to 20 routes from the city specified
