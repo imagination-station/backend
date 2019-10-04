@@ -12,10 +12,7 @@ router.post("/", checkIfAuthenticated, createCity, (req, res) => {
     res.end()
 });  
 
-router.post("/routes/", checkIfAuthenticated, createRoute, (req, res) => {
-    res.write("\nCreated Routed!");
-    res.end()
-});  
+router.post("/routes/", checkIfAuthenticated, createRoute);  
 
 router.get("/", checkIfAuthenticated, getCities);
 

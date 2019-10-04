@@ -5,16 +5,14 @@ const createCity = (req, res, next) => {
     console.log(req.body)
 
     const {
-        name,
-        state,
-        country
+        placeId,
+        name
     } = req.body;
 
     try {
         var city = new models.City({ 
-            name: name, 
-            state: state,
-            country: country
+            placeId: placeId,
+            name: name
         });
 
 

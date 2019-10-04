@@ -5,10 +5,10 @@ const getCityById = (req, res) => {
     console.log(req.params.id)
     var cityId = req.params.id
 
-    models.City.findById(cityId)        
+    models.City.find({"placeId": cityId})        
         .lean().exec()
         .then((results) => {
-            if (results == null) {
+            if (results == null || results.length == 0) {
                 return res.status("404").send("Not a city")
             }
             
@@ -24,7 +24,7 @@ const getCities = (req, res) => {
 
     models.City.find({}).lean()
         .then((cities) => {
-            if (cities == null) {
+            if (cities == null || cities.length == 0) {
                 return res.status("404").send("No cities")
             }
 
