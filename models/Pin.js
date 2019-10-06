@@ -6,7 +6,6 @@ const pinSchema = new mongoose.Schema({
         type: String,
         default: "Feature"
     },
-    placeId: String,
     geometry: {
         type: {
             type: String,
@@ -19,9 +18,10 @@ const pinSchema = new mongoose.Schema({
         }
     },
     properties: {
+        placeId: String,
         mainText: String,
         secondaryText: String,
-        imageUrl: String,
+        photoReference: [String],
         note: String
     }
 });

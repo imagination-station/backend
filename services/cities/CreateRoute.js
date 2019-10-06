@@ -53,7 +53,6 @@ const createPin = (p) => {
     var id = []
     try {
         var pin = new models.Pin({ 
-            placeId: p.placeId,
             geometry: p.geometry,
             properties: p.properties
         });
