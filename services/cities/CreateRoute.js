@@ -8,10 +8,10 @@ const createRoute = (req, res, next) => {
     const {
         name,
         creator,
-        city,
         pins
     } = req.body;
-    let placeId = city
+
+    let placeId = req.body.placeId
 
     try {
         let pinObjs = []
