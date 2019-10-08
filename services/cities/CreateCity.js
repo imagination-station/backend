@@ -6,13 +6,15 @@ const createCity = (req, res, next) => {
 
     const {
         placeId,
-        name
+        name,
+        photoReference
     } = req.body;
 
     try {
         var city = new models.City({ 
             placeId: placeId,
-            name: name
+            name: name,
+            photoReference: photoReference
         });
 
 
