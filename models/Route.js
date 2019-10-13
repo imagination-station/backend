@@ -25,7 +25,8 @@ const routeSchema = new mongoose.Schema({
     },
     access: {
         type: String,
-        enum: ['private', 'public']
+        enum: ['private', 'public'],
+        default: 'public'
     },
     numLikes: Number,
     parent: {

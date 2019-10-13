@@ -39,6 +39,23 @@ Request JSON:
 
 Retrieves a user by the id
 
+#### PUT /users/:userId/bookmark
+:userId - User ID
+
+Adds route to users bookmarks
+
+Request JSON:
+```
+{ 
+    routeId: String,
+} 
+```
+
+#### GET /users/:userId/bookmarks
+:userId - User ID
+
+Returns user's bookmarked routes
+
 #### POST /cities
 Adds a new city to the db
 

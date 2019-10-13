@@ -8,6 +8,7 @@ import Pin from '../models/Pin';
 import City from '../models/City';
 
 mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
 
 var mongoDbUrl = process.env.DB_CONNECT;
 mongoose.connect(mongoDbUrl);
