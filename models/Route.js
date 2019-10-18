@@ -31,7 +31,8 @@ const routeSchema = new mongoose.Schema({
     numLikes: Number,
     parent: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Route'
+        ref: 'Route',
+        default : null
     }
 });
 
