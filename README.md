@@ -39,10 +39,10 @@ Request JSON:
 
 Retrieves a user by the id
 
-#### POST /users/:userId/bookmarks
+#### POST /users/:userId/forks
 :userId - User ID
 
-Adds route to users bookmarks
+Adds route to users forked routes
 
 Request JSON:
 ```
@@ -51,10 +51,10 @@ Request JSON:
 } 
 ```
 
-#### GET /users/:userId/bookmarks
+#### GET /users/:userId/forks
 :userId - User ID
 
-Returns user's bookmarked routes
+Returns user's forked routes
 
 #### POST /cities
 Adds a new city to the db

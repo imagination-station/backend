@@ -36,7 +36,7 @@ const createUserMongo = (req, res, next) => {
             email: email, 
             bio: bio,
             location: location, 
-            savedRoutes:[]
+            forkedRoutes:[]
         });
         
         user.save().then(res.write("Mongo ObjectID:" + user.id))

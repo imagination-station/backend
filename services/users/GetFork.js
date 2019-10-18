@@ -2,7 +2,7 @@ import models from '../MongoConnect'
 import async from "async"
 import {populateRouteData} from "../Utilities"
 
-const getBookmarksByUser = (req, res) => {
+const getForksByUser = (req, res) => {
 
     let userId = req.params.userId
 
@@ -10,12 +10,12 @@ const getBookmarksByUser = (req, res) => {
         (next) => {
             models.User.find({"_id": userId}).lean()
                 .then((user) => {
-                    next(null, user[0].bookmarkedRoutes)
+                    next(null, user[0].forkedRoutes)
                 })
         },
-        (bookmarks, next) => {
-            async.map(bookmarks, 
-                async (bookmark) => {return models.Route.findById(bookmark).lean()}, 
+        (forks, next) => {
+            async.map(forks, 
+                async (fork) => {return models.Route.findById(fork).lean()}, 
                 (err, results) => {
                     if (err) {
                         console.log(err)
@@ -52,4 +52,4 @@ const getBookmarksByUser = (req, res) => {
         
 }
 
-export {getBookmarksByUser}
+export {getForksByUser}

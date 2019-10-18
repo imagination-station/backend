@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     bio: String,
     location: String,
-    bookmarkedRoutes: [{
+    forkedRoutes: [{
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Route' 
     }],
