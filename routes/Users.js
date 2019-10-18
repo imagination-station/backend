@@ -21,6 +21,6 @@ router.get('/:id', checkIfAuthenticated, getUserById)
 
 router.get('/:userId/bookmarks', checkIfAuthenticated, getBookmarksByUser)
 
-router.put('/:userId/bookmark', checkIfAuthenticated, addBookmarkToUser)
+router.post('/:userId/bookmarks', checkIfAuthenticated, addBookmarkToUser)
 
 export default router;

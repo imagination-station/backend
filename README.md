@@ -39,7 +39,7 @@ Request JSON:
 
 Retrieves a user by the id
 
-#### PUT /users/:userId/bookmark
+#### POST /users/:userId/bookmarks
 :userId - User ID
 
 Adds route to users bookmarks
