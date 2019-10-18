@@ -43,14 +43,6 @@ const addForkToUser = (req, res) => {
         return res.send("Success");
     })
 
-    // models.User.findByIdAndUpdate(req.params.userId, {$push: {forkedRoutes: [routeId]}}, {new: true},
-    //     (err, user) => {
-    //         if (err) return res.status(500).send(err);
-    //         console.log(user)
-    //         return res.send("Success");
-    //     }
-    // )
-
 }
 
 export {addForkToUser}
