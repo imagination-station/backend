@@ -4,6 +4,8 @@ import { getUserById } from '../services/users/GetUser';
 import { checkIfAuthenticated } from '../services/authentication/CheckAuthorization';
 import { addForkToUser } from '../services/users/CreateFork';
 import { getForksByUser } from '../services/users/GetFork';
+import { getRoutesByUser } from '../services/users/GetCreatedRoutes';
+
 
 let router = express.Router();
 
@@ -18,6 +20,8 @@ router.post('/email', createUserMongo, createUserFirebase, (req, res) => {
 })
 
 router.get('/:id', checkIfAuthenticated, getUserById)
+
+router.get('/:userId/routes', checkIfAuthenticated, getRoutesByUser)
 
 router.get('/:userId/forks', checkIfAuthenticated, getForksByUser)
 
