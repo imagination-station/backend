@@ -29,18 +29,12 @@ const addForkToUser = (req, res) => {
                 }
             )
         }
-    ], (err, routes) => {
+    ], (err) => {
         if (err) {
             res.status("500").send("")
-            return
         } 
 
-        if (routes == null || routes.length == 0) {
-            res.status("404").send("")
-            return
-        }
-
-        return res.send("Success");
+        res.send("Success");
     })
 
 }
