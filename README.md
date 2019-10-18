@@ -56,6 +56,11 @@ Request JSON:
 
 Returns user's forked routes
 
+#### GET /users/:userId/routes
+:userId - User ID
+
+Returns the user's created routes
+
 #### POST /cities
 Adds a new city to the db
 
