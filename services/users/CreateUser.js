@@ -11,12 +11,15 @@ const createUserFirebase = (req, res, next) => {
     const user = admin.auth().createUser({
         email,
         password,
+    }).then((user) => {
+        req.firebaseID = user.uid
+        next();
     }).catch((err) => {
         console.log('error', err);
         res.status("500").send({ err });
-    });
+    })
 
-    next();
+    
 }
 
 const createUserMongo = (req, res, next) => {
@@ -29,24 +32,24 @@ const createUserMongo = (req, res, next) => {
         location
     } = req.body;
 
-    try {
-        var user = new models.User({ 
-            name: name, 
-            username: username,
-            email: email, 
-            bio: bio,
-            location: location, 
-            forkedRoutes:[]
-        });
-        
-        user.save().then(res.write("Mongo ObjectID:" + user.id))
-
-    } catch (error) {
+    var user = new models.User({ 
+        name: name, 
+        username: username,
+        email: email, 
+        bio: bio,
+        location: location, 
+        forkedRoutes:[],
+        firebaseId: req.firebaseID
+    });
+    
+    user.save().then(() => {
+        res.write("Mongo ObjectID:" + user.id)
+        next();
+    }).catch((error) => {
         console.log('error', error);
         res.send({ error });
-    }
+    })
     
-    next();
 }
 
 export {createUserFirebase, createUserMongo}
