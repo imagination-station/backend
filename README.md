@@ -35,9 +35,14 @@ Request JSON:
 ```
 
 #### GET /users/:id
-:id - User ID
+:id - Mongo User ID
 
 Retrieves a user by the id
+
+### GET /users/?firebaseId=:id
+:id - Firebase User Id
+
+Retrived a user by id
 
 #### POST /users/:userId/forks
 :userId - User ID
