@@ -1,6 +1,6 @@
 import express from 'express';
 import { createUserFirebase, createUserMongo } from '../services/users/CreateUser';
-import { getUserById } from '../services/users/GetUser';
+import { getUserById, getUserByFirebaseId } from '../services/users/GetUser';
 import { checkIfAuthenticated } from '../services/authentication/CheckAuthorization';
 import { addForkToUser } from '../services/users/CreateFork';
 import { getForksByUser } from '../services/users/GetFork';
@@ -14,12 +14,14 @@ router.post('/social', createUserMongo, (req, res) => {
     res.end();
 })
 
-router.post('/email', createUserMongo, createUserFirebase, (req, res) => {
-    res.write("\nFirebase Success");
+router.post('/email', createUserFirebase, createUserMongo, (req, res) => {
+    res.write("\nMongo and Firebase Success");
     res.end();
 })
 
 router.get('/:id', checkIfAuthenticated, getUserById)
+
+router.get('/', checkIfAuthenticated, getUserByFirebaseId)
 
 router.get('/:userId/routes', checkIfAuthenticated, getRoutesByUser)
 

@@ -28,4 +28,31 @@ const getUserById = (req, res) => {
         })
 }
 
-export {getUserById}
+const getUserByFirebaseId = (req, res) => {
+
+    console.log(req.params.id)
+    let id = req.query.firebaseId;
+    var user = {};
+
+    models.User.find({"firebaseId": id})
+        .lean()
+        .then((results) => {
+            user = results[0]
+
+            models.City.find({"placeId": results[0].location})  
+                .lean().exec()
+                .then((results) => {
+                    user.location = results[0]
+
+                    return res.send(user)
+                })
+                .catch((error) => {
+                    return res.send(error)
+                })
+        })
+        .catch((error) => {
+            return res.send(error)
+        })
+}
+
+export {getUserById, getUserByFirebaseId}

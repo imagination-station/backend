@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Route' 
     }],
+    firebaseId: String
 });
 
 const User = mongoose.model('User', userSchema);
