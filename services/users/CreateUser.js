@@ -12,8 +12,8 @@ const createUserFirebase = (req, res, next) => {
         email,
         password,
     }).catch((err) => {
-        console.log('error', error);
-        res.status("500").send({ error });
+        console.log('error', err);
+        res.status("500").send({ err });
     });
 
     next();
