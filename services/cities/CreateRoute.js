@@ -26,6 +26,9 @@ const createRoute = (req, res, next) => {
                 .then((city) => {
                     next(null, city[0]._id)
                 })
+                .catch((err) => {
+                    return res.status("501").send("No such city found")
+                })
             },
             (cityId, next) => {
                 let route = new models.Route({ 

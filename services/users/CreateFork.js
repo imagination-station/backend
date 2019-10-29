@@ -12,11 +12,18 @@ const addForkToUser = (req, res) => {
     async.waterfall([
         (next) => {
             models.Route.findById(routeId).exec( (err, route) => {
-                    route._id = mongoose.Types.ObjectId();
-                    route.isNew = true;
-                    route.creator = req.params.userId;
-                    route.parent = routeId;
-                    route.save().then(next(null, route.id))
+                    if (err) {
+                        console.log(err)
+                        return res.status("500").send("Route not found")
+                    } else {
+                        route._id = mongoose.Types.ObjectId();
+                        route.isNew = true;
+                        route.creator = req.params.userId;
+                        route.parent = routeId;
+                        route.save().then(next(null, route.id))
+                    }
+
+                    
                 }
             );
         },

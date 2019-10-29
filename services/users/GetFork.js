@@ -37,7 +37,11 @@ const getForksByUser = (req, res) => {
             return
         }
 
-        async.map(routes, 
+        var filteredRoutes = routes.filter((el) => {
+            return el != null;
+        })
+
+        async.map(filteredRoutes, 
             async (route) => {return populateRouteData(route)}, 
             (err, results) => {
                 if (err) {
