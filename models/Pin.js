@@ -21,7 +21,7 @@ const pinSchema = new mongoose.Schema({
         placeId: String,
         mainText: String,
         secondaryText: String,
-        photoReference: [String],
+        photoRefs: [String],
         note: String
     }
 });
