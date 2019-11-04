@@ -21,9 +21,9 @@ router.get("/routes/", checkIfAuthenticated, getRoutes);
 
 router.get("/routes/:id", checkIfAuthenticated, getRouteById); 
 
-router.get("/:id", checkIfAuthenticated, getCityById);
+router.delete("/routes/:id", checkIfAuthenticated, deleteRouteById);
 
-router.delete("/:id", checkIfAuthenticated, deleteRouteById);
+router.get("/:id", checkIfAuthenticated, getCityById);
 
 router.get("/:id/routes", checkIfAuthenticated, getRoutesByCity, getRoutesByCityAndTags);  
 
