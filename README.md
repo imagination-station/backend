@@ -115,3 +115,15 @@ Retrieves up to 20 routes
 :id - City ID
 
 Retrieves up to 20 routes from the city specified
+
+#### GET /cities/:id/routes
+Retrieves up to 50 routes in the city by tags
+
+:id - City ID
+Body:
+```
+{
+    "tags": ["BLAH", "blah"]
+} 
+```
+

@@ -52,7 +52,14 @@ const getRoutes = (req, res) => {
         
 }
 
-const getRoutesByCity = (req, res) => {
+const getRoutesByCity = (req, res, next) => {
+
+    if (req.body.tags != null) {
+        // if tags are there then client wants search by tags
+        // so we skip to the next function
+        next()
+        return 
+    }
 
     let placeId = req.params.id
 
@@ -95,4 +102,49 @@ const getRoutesByCity = (req, res) => {
         
 }
 
-export {getRouteById, getRoutes, getRoutesByCity}
+const getRoutesByCityAndTags = (req, res) => {
+
+    console.log(req.body.tags)
+    let placeId = req.params.id
+    const tagsReq = req.body.tags;
+
+    async.waterfall([
+        (next) => {
+            models.City.find({"placeId": placeId}).lean()
+                .then((city) => {
+                    next(null, city[0]._id)
+                })
+        },
+        (cityId, next) => {
+            models.Route.find({"city": cityId, "tags": {$elemMatch: {$in: tagsReq}}}).lean().limit(50)
+                .then((routes) => {
+                    next(null, routes)
+                
+                })
+        }
+    ], (err, routes) => {
+        if (err) {
+            res.status("500").send("")
+            return
+        } 
+
+        if (routes == null || routes.length == 0) {
+            res.status("404").send("")
+            return
+        }
+
+        async.map(routes, 
+            async (route) => {return populateRouteData(route)}, 
+            (err, results) => {
+                if (err) {
+                    console.log(err)
+                    res.status(500).send(err)
+                }
+                res.send(results)
+            }
+        );
+    })
+        
+}
+
+export {getRouteById, getRoutes, getRoutesByCity, getRoutesByCityAndTags}

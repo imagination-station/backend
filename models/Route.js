@@ -33,6 +33,9 @@ const routeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Route',
         default : null
+    },
+    tags: {
+        type: [String],
     }
 });
 

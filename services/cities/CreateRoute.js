@@ -9,7 +9,8 @@ const createRoute = (req, res, next) => {
         name,
         creator,
         city,
-        pins
+        pins,
+        tags
     } = req.body;
     let placeId = city
 
@@ -35,7 +36,8 @@ const createRoute = (req, res, next) => {
                     name: name, 
                     creator: creator,
                     city: cityId,
-                    pins: pinObjs
+                    pins: pinObjs,
+                    tags: tags
                 }); 
 
                 next(null, route)
