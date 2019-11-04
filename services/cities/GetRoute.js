@@ -30,7 +30,7 @@ const getRouteById = (req, res) => {
 
 const getRoutes = (req, res) => {
 
-    models.Route.find({}).lean().limit(20)
+    models.Route.find({"access": "public"}).lean().limit(100)
         .then((routes) => {
                 
             async.map(routes, 
@@ -71,7 +71,7 @@ const getRoutesByCity = (req, res, next) => {
                 })
         },
         (cityId, next) => {
-            models.Route.find({"city": cityId}).lean().limit(20)
+            models.Route.find({"city": cityId, "access": "public"}).lean().limit(100)
                 .then((routes) => {
                     next(null, routes)
                 
@@ -116,7 +116,7 @@ const getRoutesByCityAndTags = (req, res) => {
                 })
         },
         (cityId, next) => {
-            models.Route.find({"city": cityId, "tags": {$elemMatch: {$in: tagsReq}}}).lean().limit(50)
+            models.Route.find({"city": cityId, "access": "public", "tags": {$elemMatch: {$in: tagsReq}}}).lean().limit(100)
                 .then((routes) => {
                     next(null, routes)
                 
