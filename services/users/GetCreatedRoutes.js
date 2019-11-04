@@ -18,7 +18,7 @@ const getRoutesByUser = (req, res) => {
                     }
 
                     if (results == null || results.length == 0) {
-                        res.status("404").send("This user hasn't created any routes")
+                        res.status("404").send([])
                         return
                     } 
 

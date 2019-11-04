@@ -84,7 +84,7 @@ const getRoutesByCity = (req, res, next) => {
         } 
 
         if (routes == null || routes.length == 0) {
-            res.status("404").send("")
+            res.status("404").send([])
             return
         }
 
@@ -129,7 +129,7 @@ const getRoutesByCityAndTags = (req, res) => {
         } 
 
         if (routes == null || routes.length == 0) {
-            res.status("404").send("")
+            res.status("404").send([])
             return
         }
 
