@@ -23,8 +23,8 @@ router.get("/routes/:id", checkIfAuthenticated, getRouteById);
 
 router.get("/:id", checkIfAuthenticated, getCityById);
 
-router.get("/:id/routes", checkIfAuthenticated, getRoutesByCity, getRoutesByCityAndTags);  
-
 router.delete("/:id", checkIfAuthenticated, deleteRouteById);
+
+router.get("/:id/routes", checkIfAuthenticated, getRoutesByCity, getRoutesByCityAndTags);  
 
 export default router;
