@@ -3,7 +3,7 @@ import {checkIfAuthenticated} from '../services/authentication/CheckAuthorizatio
 import createCity from '../services/cities/CreateCity';
 import createRoute from '../services/cities/CreateRoute';
 import {getCityById, getCities} from '../services/cities/GetCity'
-import {getRouteById, getRoutes, getRoutesByCity} from '../services/cities/GetRoute'
+import {getRouteById, getRoutes, getRoutesByCity, getRoutesByCityAndTags} from '../services/cities/GetRoute'
 
 let router = Router();
 
@@ -22,6 +22,6 @@ router.get("/routes/:id", checkIfAuthenticated, getRouteById);
 
 router.get("/:id", checkIfAuthenticated, getCityById);
 
-router.get("/:id/routes", checkIfAuthenticated, getRoutesByCity);  
+router.get("/:id/routes", checkIfAuthenticated, getRoutesByCity, getRoutesByCityAndTags);  
 
 export default router;
