@@ -20,6 +20,7 @@ const addForkToUser = (req, res) => {
                         route.isNew = true;
                         route.creator = req.params.userId;
                         route.parent = routeId;
+                        route.access = "private"
                         route.save().then(next(null, route.id))
                     }
 
@@ -32,16 +33,16 @@ const addForkToUser = (req, res) => {
                 (err, user) => {
                     if (err) return res.status(500).send(err);
                     console.log(user)
-                    next(null);
+                    next(null, id);
                 }
             )
         }
-    ], (err) => {
+    ], (err, id) => {
         if (err) {
             res.status("500").send("")
         } 
 
-        res.send("Success");
+        res.send(id);
     })
 
 }
