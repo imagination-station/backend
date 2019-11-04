@@ -108,6 +108,11 @@ Request JSON:
 
 Retrieves a route by its id
 
+#### DELETE /cities/routes/:id
+:id - Route ID
+
+Deletes a route by its id
+
 #### GET /cities/routes
 Retrieves up to 20 routes
 

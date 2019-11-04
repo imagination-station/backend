@@ -1,9 +1,10 @@
-import {Router} from 'express';
-import {checkIfAuthenticated} from '../services/authentication/CheckAuthorization';
+import { Router } from 'express';
+import { checkIfAuthenticated } from '../services/authentication/CheckAuthorization';
 import createCity from '../services/cities/CreateCity';
 import createRoute from '../services/cities/CreateRoute';
-import {getCityById, getCities} from '../services/cities/GetCity'
-import {getRouteById, getRoutes, getRoutesByCity, getRoutesByCityAndTags} from '../services/cities/GetRoute'
+import { getCityById, getCities } from '../services/cities/GetCity'
+import { getRouteById, getRoutes, getRoutesByCity, getRoutesByCityAndTags } from '../services/cities/GetRoute'
+import { deleteRouteById } from '../services/cities/DeleteRoute';
 
 let router = Router();
 
@@ -19,6 +20,8 @@ router.get("/", checkIfAuthenticated, getCities);
 router.get("/routes/", checkIfAuthenticated, getRoutes);
 
 router.get("/routes/:id", checkIfAuthenticated, getRouteById); 
+
+router.delete("/routes/:id", checkIfAuthenticated, deleteRouteById);
 
 router.get("/:id", checkIfAuthenticated, getCityById);
 
