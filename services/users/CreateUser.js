@@ -42,9 +42,8 @@ const createUserMongo = (req, res, next) => {
         firebaseId: req.firebaseID
     });
     
-    user.save().then(() => {
-        res.write("Mongo ObjectID:" + user.id)
-        next();
+    user.save().then((user) => {
+        res.json({"Mongo ObjectID" : user.id});
     }).catch((error) => {
         console.log('error', error);
         res.send({ error });

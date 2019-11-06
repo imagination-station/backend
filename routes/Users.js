@@ -14,10 +14,7 @@ router.post('/social', createUserMongo, (req, res) => {
     res.end();
 })
 
-router.post('/email', createUserFirebase, createUserMongo, (req, res) => {
-    res.write("\nMongo and Firebase Success");
-    res.end();
-})
+router.post('/email', createUserFirebase, createUserMongo)
 
 router.get('/:id', checkIfAuthenticated, getUserById)
 

@@ -42,7 +42,8 @@ const addForkToUser = (req, res) => {
             res.status("500").send("")
         } 
 
-        res.send("Mongo ObjectID:" + id);
+        res.json({"Mongo ObjectID" : id});
+        res.end()
     })
 
 }

@@ -44,7 +44,10 @@ const createRoute = (req, res, next) => {
             }
         ],(err, route) => {
             if (err) console.log(err)
-            route.save().then(res.send("Mongo ObjectID:" + route.id))
+            route.save().then(() => {
+                res.json({"Mongo ObjectID" : route.id});
+                res.end()
+            })
         })
 
     } catch (error) {

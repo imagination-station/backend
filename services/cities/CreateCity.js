@@ -18,7 +18,10 @@ const createCity = (req, res, next) => {
         });
 
 
-        city.save().then(res.write("Mongo ObjectID:" + city.id))
+        city.save().then((city) => {
+            res.json({"Mongo ObjectID" : city.id});
+            res.end()
+        })
 
     } catch (error) {
         console.log('error', error);
