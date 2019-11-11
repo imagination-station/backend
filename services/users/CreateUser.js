@@ -39,6 +39,7 @@ const createUserMongo = (req, res, next) => {
         bio: bio,
         location: location, 
         forkedRoutes:[],
+        likedRoutes:[],
         firebaseId: req.firebaseID
     });
     

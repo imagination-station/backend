@@ -5,6 +5,7 @@ import createRoute from '../services/cities/CreateRoute';
 import { getCityById, getCities } from '../services/cities/GetCity'
 import { getRouteById, getRoutes, getRoutesByCity, getRoutesByCityAndTags } from '../services/cities/GetRoute'
 import { deleteRouteById } from '../services/cities/DeleteRoute';
+import { likeRouteById } from '../services/cities/LikeRoutes';
 
 let router = Router();
 
@@ -22,6 +23,8 @@ router.get("/routes/", checkIfAuthenticated, getRoutes);
 router.get("/routes/:id", checkIfAuthenticated, getRouteById); 
 
 router.delete("/routes/:id", checkIfAuthenticated, deleteRouteById);
+
+router.patch("/routes/:id/likes",  likeRouteById);
 
 router.get("/:id", checkIfAuthenticated, getCityById);
 
