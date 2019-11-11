@@ -6,7 +6,7 @@ const getRoutesByUser = (req, res) => {
 
     let userId = req.params.userId
 
-    models.Route.find({"creator": userId}).lean().limit(50)
+    models.Route.find({"creator": userId, "access": "public"}).lean().limit(100)
         .then((routes) => {
             async.map(routes, 
                 async (route) => {return populateRouteData(route)}, 
