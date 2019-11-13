@@ -61,6 +61,12 @@ Request JSON:
 
 Returns user's forked routes
 
+#### GET /users/:userId/likes
+:userId - User ID
+
+Returns user's liked routes
+
+
 #### GET /users/:userId/routes
 :userId - User ID
 
@@ -131,4 +137,17 @@ Body:
     "tags": ["BLAH", "blah"]
 } 
 ```
+
+#### PATCH /cities/routes/:id/likes
+Likes or unlikes a route. Adds or removes route from user's liked routes. 
+
+:id - Route ID
+Body:
+```
+{
+	"type": "like" or "unlike",
+	"userId": "insert_user_id"
+} 
+```
+
 
