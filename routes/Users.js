@@ -5,6 +5,7 @@ import { checkIfAuthenticated } from '../services/authentication/CheckAuthorizat
 import { addForkToUser } from '../services/users/CreateFork';
 import { getForksByUser } from '../services/users/GetFork';
 import { getRoutesByUser } from '../services/users/GetCreatedRoutes';
+import { getLikesByUser } from '../services/users/GetLikes';
 
 
 let router = express.Router();
@@ -25,5 +26,7 @@ router.get('/:userId/routes', checkIfAuthenticated, getRoutesByUser)
 router.get('/:userId/forks', checkIfAuthenticated, getForksByUser)
 
 router.post('/:userId/forks', checkIfAuthenticated, addForkToUser)
+
+router.get('/:userId/likes', checkIfAuthenticated, getLikesByUser)
 
 export default router;
