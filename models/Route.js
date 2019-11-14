@@ -28,7 +28,10 @@ const routeSchema = new mongoose.Schema({
         enum: ['private', 'public'],
         default: 'public'
     },
-    numLikes: Number,
+    numLikes: {
+        type: Number,
+        default: 0
+    },
     parent: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Route',

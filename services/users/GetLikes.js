@@ -2,7 +2,7 @@ import models from '../MongoConnect'
 import async from "async"
 import {populateRouteData} from "../Utilities"
 
-const getForksByUser = (req, res) => {
+const getLikesByUser = (req, res) => {
 
     let userId = req.params.userId
 
@@ -10,7 +10,7 @@ const getForksByUser = (req, res) => {
         (next) => {
             models.User.find({"_id": userId}).lean()
                 .then((user) => {
-                    next(null, user[0].forkedRoutes)
+                    next(null, user[0].likedRoutes)
                 })
         },
         (forks, next) => {
@@ -56,4 +56,4 @@ const getForksByUser = (req, res) => {
         
 }
 
-export {getForksByUser}
+export { getLikesByUser }
