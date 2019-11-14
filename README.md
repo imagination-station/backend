@@ -138,10 +138,11 @@ Body:
 } 
 ```
 
-#### PATCH /cities/routes/:id/likes
+#### PATCH /cities/routes/:routeId/likes
 Likes or unlikes a route. Adds or removes route from user's liked routes. 
 
-:id - Route ID
+:routeId - Route ID
+
 Body:
 ```
 {
