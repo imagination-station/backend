@@ -9,6 +9,8 @@ import City from '../models/City';
 
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', false);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useCreateIndex', true);
 
 var mongoDbUrl = process.env.DB_CONNECT;
 mongoose.connect(mongoDbUrl);
