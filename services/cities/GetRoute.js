@@ -54,15 +54,13 @@ const getRoutes = (req, res) => {
 
 const getRoutesByCity = (req, res, next) => {
 
-    if (req.body.tags != null) {
-        // if tags are there then client wants search by tags
-        // so we skip to the next function
-        next()
-        return 
+    let placeId = req.params.id
+
+    var page = 0;
+    if (req.query.page != null) {
+        page = Number(req.query.page)
     }
 
-    let placeId = req.params.id
-
     async.waterfall([
         (next) => {
             models.City.find({"placeId": placeId}).lean()
@@ -71,7 +69,7 @@ const getRoutesByCity = (req, res, next) => {
                 })
         },
         (cityId, next) => {
-            models.Route.find({"city": cityId, "access": "public"}).lean().limit(100)
+            models.Route.find({"city": cityId, "access": "public"}).lean().skip(page).limit(10)
                 .then((routes) => {
                     next(null, routes)
                 
@@ -102,11 +100,16 @@ const getRoutesByCity = (req, res, next) => {
         
 }
 
-const getRoutesByCityAndTags = (req, res) => {
+const getRoutesByTags = (req, res) => {
 
-    console.log(req.body.tags)
     let placeId = req.params.id
-    const tagsReq = req.body.tags;
+    const tagsReq = [req.query.tag];
+    console.log(tagsReq)
+
+    var page = 0;
+    if (req.query.page != null) {
+        page = Number(req.query.page)
+    }
 
     async.waterfall([
         (next) => {
@@ -116,7 +119,7 @@ const getRoutesByCityAndTags = (req, res) => {
                 })
         },
         (cityId, next) => {
-            models.Route.find({"city": cityId, "access": "public", "tags": {$elemMatch: {$in: tagsReq}}}).lean().limit(100)
+            models.Route.find({"city": cityId, "access": "public", "tags": {$elemMatch: {$in: tagsReq}}}).lean().skip(page).limit(10)
                 .then((routes) => {
                     next(null, routes)
                 
@@ -147,4 +150,52 @@ const getRoutesByCityAndTags = (req, res) => {
         
 }
 
-export {getRouteById, getRoutes, getRoutesByCity, getRoutesByCityAndTags}
+const getRoutesByLocation = (req, res) => {
+
+    let search_lat = Number(req.query.lat)
+    let search_lng = Number(req.query.lng)
+
+    var page = 0;
+    if (req.query.page != null) {
+        page = req.query.page
+    }
+    console.log("here")
+    models.Route.find({
+        "pins[0]": { "Pin.geometry": {
+            $nearSphere: { 
+                $geometry: { 
+                    type: "Point", 
+                    coordinates: [ search_lng, search_lat ] 
+                }, 
+                $maxDistance: 1000000 
+            } 
+        } 
+    }
+    }).lean().skip(page).limit(10)
+    .then((routes) => {
+
+        async.map(routes, 
+            async (route) => {return populateRouteData(route)}, 
+            (err, results) => {
+                if (err) {
+                    console.log(err)
+                    res.status(500).send(err)
+                }
+                res.send(results)
+            }
+        );
+
+    }).catch((err) => {
+        console.log(err)
+        res.status("500").send("Error. Try again later.")
+    })
+
+    
+}
+
+const getRoutesByLocationAndTag = (req, res) => {
+
+    
+}
+
+export {getRouteById, getRoutes, getRoutesByCity, getRoutesByTags, getRoutesByLocation, getRoutesByLocationAndTag}

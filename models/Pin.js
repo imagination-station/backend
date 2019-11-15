@@ -26,5 +26,7 @@ const pinSchema = new mongoose.Schema({
     }
 });
 
+pinSchema.index({ "location": "2dsphere" });
 const Pin = mongoose.model('Pin', pinSchema);
+
 export default Pin;
