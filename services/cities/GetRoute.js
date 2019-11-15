@@ -157,22 +157,23 @@ const getRoutesByLocation = (req, res) => {
 
     var page = 0;
     if (req.query.page != null) {
-        page = req.query.page
+        page = Number(req.query.page)
     }
     console.log("here")
+
     models.Route.find({
-        "pins[0]": { "Pin.geometry": {
-            $nearSphere: { 
-                $geometry: { 
-                    type: "Point", 
-                    coordinates: [ search_lng, search_lat ] 
-                }, 
-                $maxDistance: 1000000 
+        firstPin: {
+            $geoWithin: { 
+                $centerSphere: [
+                    [ search_lng, search_lat ] ,
+                    1100/3963.2
+                ] 
+                
             } 
         } 
-    }
     }).lean().skip(page).limit(10)
     .then((routes) => {
+        console.log(routes)
 
         async.map(routes, 
             async (route) => {return populateRouteData(route)}, 
@@ -184,12 +185,11 @@ const getRoutesByLocation = (req, res) => {
                 res.send(results)
             }
         );
-
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err)
         res.status("500").send("Error. Try again later.")
     })
-
     
 }
 

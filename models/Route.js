@@ -39,6 +39,17 @@ const routeSchema = new mongoose.Schema({
     },
     tags: {
         type: [String],
+    },
+    firstPin: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
     }
 });
 

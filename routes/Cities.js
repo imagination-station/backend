@@ -54,8 +54,6 @@ router.get("/:id", checkIfAuthenticated, getCityById);
 
 router.get("/:id/routes", checkIfAuthenticated, (req, res, next) => {
     if (req.query.tag != null) {
-        console.log("here")
-
         getRoutesByTags(req, res, next)
 
     } else if (req.query.tag == null) {
