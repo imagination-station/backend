@@ -29,7 +29,8 @@ const createUserMongo = (req, res, next) => {
         username,
         email,
         bio,
-        location
+        location,
+        tags
     } = req.body;
 
     var user = new models.User({ 
@@ -40,7 +41,8 @@ const createUserMongo = (req, res, next) => {
         location: location, 
         forkedRoutes:[],
         likedRoutes:[],
-        firebaseId: req.firebaseID
+        firebaseId: req.firebaseID,
+        tags: tags
     });
     
     user.save().then((user) => {

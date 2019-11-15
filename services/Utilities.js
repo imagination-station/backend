@@ -7,7 +7,7 @@ async function populateRouteData(route) {
         })
         .catch((err) => {
             console.log("In Utilities", "City id not found")
-            route.creator = {"error": "City not found"}
+            route.city = {"error": "City not found"}
         })
     await models.User.findById(route.creator).lean().exec()
         .then((creator) => {
@@ -23,7 +23,7 @@ async function populateRouteData(route) {
         })
         .catch((err) => {
             console.log("In Utilities", "Pins not found")
-            route.creator = {"error": "Pins not found"}
+            route.pins = {"error": "Pins not found"}
         })
 
     return route
