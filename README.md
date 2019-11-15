@@ -127,16 +127,14 @@ Retrieves up to 20 routes
 
 Retrieves up to 20 routes from the city specified
 
-#### GET /cities/:id/routes
-Retrieves up to 50 routes in the city by tags
+#### GET /cities/:id/routes/?tag=TAG&page=0
+Retrieves up to 10 routes in the city by tag
 
 :id - City ID
-Body:
-```
-{
-    "tags": ["BLAH", "blah"]
-} 
-```
+Query Params:
+tag - the tag you want to query by
+page - how many routes you have so far recieved
+
 
 #### PATCH /cities/routes/:routeId/likes
 Likes or unlikes a route. Adds or removes route from user's liked routes. 
