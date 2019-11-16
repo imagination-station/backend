@@ -40,11 +40,12 @@ const routeSchema = new mongoose.Schema({
     tags: {
         type: [String],
     },
-    firstPin: {
+    startPoint: {
         type: {
             type: String,
             enum: ['Point'],
-            required: true
+            required: true,
+            default: "Point"
         },
         coordinates: {
             type: [Number],
@@ -53,5 +54,6 @@ const routeSchema = new mongoose.Schema({
     }
 });
 
+routeSchema.index({ "location": "2dsphere" });
 const Route = mongoose.model('Route', routeSchema);
 export default Route;

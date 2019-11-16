@@ -23,21 +23,26 @@ const createRoute = (req, res, next) => {
 
         async.waterfall([
             (next) => {
-                models.City.find({"placeId": placeId}).lean()
+                console.log(city)
+                models.City.find({"placeId": city}).lean()
                 .then((city) => {
                     next(null, city[0]._id)
                 })
                 .catch((err) => {
+                    console.log(err)
                     return res.status("501").send("No such city found")
                 })
             },
             (cityId, next) => {
+                let locationPin = {type: "Point", coordinates: pins[0].geometry.coordinates}
+                console.log(locationPin)
                 let route = new models.Route({ 
                     name: name, 
                     creator: creator,
                     city: cityId,
                     pins: pinObjs,
-                    tags: tags
+                    tags: tags,
+                    startPoint: locationPin
                 }); 
 
                 next(null, route)
