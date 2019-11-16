@@ -135,6 +135,14 @@ Query Params:
 tag - the tag you want to query by
 page - how many routes you have so far recieved
 
+#### GET /cities/routes/?lng=33.7850&lat=84.2738&tag=Walkable&page=0
+Retrives up to 10 routes within ten miles of the lng and lat
+
+Query Params:
+lng - the longitude 
+lat - the latitude 
+tag - the tag you want to query by
+page - how many routes you have so far recieved
 
 #### PATCH /cities/routes/:routeId/likes
 Likes or unlikes a route. Adds or removes route from user's liked routes. 
