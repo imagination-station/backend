@@ -14,7 +14,7 @@ const getRouteById = (req, res) => {
                     (err, results) => {
                         if (err) {
                             console.log(err)
-                            res.status(500).send(err)
+                            res.status(500).json({"err": err}).end()
                         }
                         res.send(results)
                     }
@@ -37,7 +37,7 @@ const getRoutes = (req, res) => {
                 (err, results) => {
                     if (err) {
                         console.log(err)
-                        res.status(500).send(err)
+                        res.status(500).json({"err": err}).end()
                     }
                     res.send(results)
                 }
@@ -64,7 +64,16 @@ const getRoutesByCityAndTags = (req, res, next) => {
         (next) => {
             models.City.find({"placeId": placeId}).lean()
                 .then((city) => {
-                    next(null, city[0]._id)
+                    if (city == null || city.length == 0) {
+                        throw "City not found"
+                    } else {
+                        next(null, city[0]._id)
+                    }
+                    
+                })
+                .catch((err) => {
+                    res.status("404").json({"err": err}).end()
+                    return
                 })
         },
         (cityId, next) => {
@@ -85,7 +94,7 @@ const getRoutesByCityAndTags = (req, res, next) => {
         }
     ], (err, routes) => {
         if (err) {
-            res.status("500").send("")
+            res.status("500").json({"err": err}).end()
             return
         } 
 
@@ -99,7 +108,7 @@ const getRoutesByCityAndTags = (req, res, next) => {
             (err, results) => {
                 if (err) {
                     console.log(err)
-                    res.status(500).send(err)
+                    res.status(500).json({"err": err}).end()
                 }
                 res.send(results)
             }
@@ -153,7 +162,7 @@ const getRoutesByLocationAndTag = (req, res) => {
     })
     .catch((err) => {
         console.log(err)
-        res.status("500").send("Error. Try again later.")
+        res.status("500").json({"err": err}).end()
     })
     
 }
