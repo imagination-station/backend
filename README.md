@@ -79,8 +79,8 @@ Request JSON:
 ```
 {
     name: String, 
-    state: String,
-    country: String
+    placeId: String,
+    photoRef: String
 } 
 ```
 
